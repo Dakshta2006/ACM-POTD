@@ -2,69 +2,46 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compile C++ (C++17)",
+            "label": "Compile & Run",
             "type": "shell",
             "command": "C:\\MinGW\\bin\\g++",
             "args": [
                 "-std=c++17",
                 "-O2",
                 "-Wall",
-                "${file}",
+                "solution.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "solution.exe"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": ["$gcc"],
             "presentation": {
-                "echo": true,
                 "reveal": "always",
-                "focus": false,
                 "panel": "shared"
-            }
-        },
-        {
-            "label": "Run C++ (with input from input.txt)",
-            "type": "shell",
-            "command": "powershell",
-            "args": [
-                "-Command",
-                "&{& '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt'}"
-            ],
-            "group": {
-                "kind": "test",
-                "isDefault": true
             },
-            "dependsOn": [
-                "Compile C++ (C++17)"
-            ],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
+            "runOptions": {
+                "runOn": "folderOpen"
             }
         },
         {
-            "label": "Build & Run",
+            "label": "Run & Show Output",
             "type": "shell",
             "command": "powershell",
             "args": [
                 "-Command",
-                "&{C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt' }}"
+                ".\\solution.exe; Write-Host '---OUTPUT---'; Get-Content output.txt"
             ],
+            "dependsOn": ["Compile & Run"],
             "group": {
                 "kind": "build"
             },
             "presentation": {
-                "echo": true,
                 "reveal": "always",
-                "focus": false,
-                "panel": "shared"
+                "panel": "shared",
+                "focus": true
             }
         }
     ]
