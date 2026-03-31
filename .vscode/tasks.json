@@ -5,6 +5,9 @@
             "label": "Compile C++ (C++17)",
             "type": "shell",
             "command": "g++",
+            "windows": {
+                "command": "C:\\MinGW\\bin\\g++"
+            },
             "args": [
                 "-std=c++17",
                 "-O2",
