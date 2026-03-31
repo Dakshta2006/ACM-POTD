@@ -33,7 +33,15 @@
         {
             "label": "Run C++ (with input from input.txt)",
             "type": "shell",
-            "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "command": "powershell",
+            "windows": {
+                "command": "powershell"
+            },
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe; if (Test-Path ${fileDirname}\\output.txt) { Write-Host '--- OUTPUT ---'; Get-Content ${fileDirname}\\output.txt }"
+            ],
             "group": {
                 "kind": "test",
                 "isDefault": true
