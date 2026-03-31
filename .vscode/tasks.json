@@ -4,17 +4,11 @@
         {
             "label": "Compile C++ (C++17)",
             "type": "shell",
-            "command": "g++",
-            "windows": {
-                "command": "C:\\MinGW\\bin\\g++"
-            },
+            "command": "powershell",
             "args": [
-                "-std=c++17",
-                "-O2",
-                "-Wall",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe"
+                "-NoProfile",
+                "-Command",
+                "C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { Write-Host '✓ Compiled successfully' -ForegroundColor Green } else { Write-Host '✗ Compilation failed' -ForegroundColor Red; exit 1 }"
             ],
             "group": {
                 "kind": "build",
@@ -34,13 +28,10 @@
             "label": "Run C++ (with input from input.txt)",
             "type": "shell",
             "command": "powershell",
-            "windows": {
-                "command": "powershell"
-            },
             "args": [
                 "-NoProfile",
                 "-Command",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe; if (Test-Path ${fileDirname}\\output.txt) { Write-Host '--- OUTPUT ---'; Get-Content ${fileDirname}\\output.txt }"
+                "'${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt'"
             ],
             "group": {
                 "kind": "test",
@@ -59,15 +50,11 @@
         {
             "label": "Build & Run",
             "type": "shell",
-            "command": "g++",
+            "command": "powershell",
             "args": [
-                "-std=c++17",
-                "-O2",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "&&",
-                "${fileDirname}/${fileBasenameNoExtension}.exe"
+                "-NoProfile",
+                "-Command",
+                "C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { Write-Host '✓ Compiled' -ForegroundColor Green; '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt' } else { Write-Host '✗ Compilation failed' -ForegroundColor Red }"
             ],
             "group": {
                 "kind": "build"
