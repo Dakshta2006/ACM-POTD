@@ -4,11 +4,14 @@
         {
             "label": "Compile C++ (C++17)",
             "type": "shell",
-            "command": "powershell",
+            "command": "C:\\MinGW\\bin\\g++",
             "args": [
-                "-NoProfile",
-                "-Command",
-                "C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { Write-Host '✓ Compiled successfully' -ForegroundColor Green } else { Write-Host '✗ Compilation failed' -ForegroundColor Red; exit 1 }"
+                "-std=c++17",
+                "-O2",
+                "-Wall",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "group": {
                 "kind": "build",
@@ -29,9 +32,8 @@
             "type": "shell",
             "command": "powershell",
             "args": [
-                "-NoProfile",
                 "-Command",
-                "'${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt'"
+                "&{& '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt'}"
             ],
             "group": {
                 "kind": "test",
@@ -52,9 +54,8 @@
             "type": "shell",
             "command": "powershell",
             "args": [
-                "-NoProfile",
                 "-Command",
-                "C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { Write-Host '✓ Compiled' -ForegroundColor Green; '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt' } else { Write-Host '✗ Compilation failed' -ForegroundColor Red }"
+                "&{C:\\MinGW\\bin\\g++ -std=c++17 -O2 -Wall '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe'; if ($LASTEXITCODE -eq 0) { '${fileDirname}\\${fileBasenameNoExtension}.exe'; Write-Host '`n--- OUTPUT ---' -ForegroundColor Cyan; Get-Content '${fileDirname}\\output.txt' }}"
             ],
             "group": {
                 "kind": "build"
