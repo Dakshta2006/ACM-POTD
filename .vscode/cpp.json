@@ -1,0 +1,31 @@
+{
+    "cpp-cp": {
+        "prefix": "cpstart",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "",
+            "void solve() {",
+            "    // Write your solution here",
+            "    int n;",
+            "    cin >> n;",
+            "    cout << n << endl;",
+            "}",
+            "",
+            "int main() {",
+            "    #ifndef ONLINE_JUDGE",
+            "        freopen(\"input.txt\", \"r\", stdin);",
+            "        freopen(\"output.txt\", \"w\", stdout);",
+            "    #endif",
+            "    ",
+            "    ios_base::sync_with_stdio(false);",
+            "    cin.tie(NULL);",
+            "    ",
+            "    solve();",
+            "    ",
+            "    return 0;",
+            "}$0"
+        ],
+        "description": "C++ Competitive Programming Template with Fast I/O and File I/O"
+    }
+}

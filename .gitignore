@@ -1,0 +1,24 @@
+# Executables
+*.exe
+*.out
+*.o
+
+# Input/Output files
+input.txt
+output.txt
+
+# Custom competitive programming files
+*.in
+*.out
+
+# VS Code
+.vscode/
+!.vscode/tasks.json
+!.vscode/cpp.json
+
+# macOS
+.DS_Store
+
+# Build directories
+build/
+bin/
